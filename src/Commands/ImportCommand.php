@@ -78,7 +78,7 @@ class ImportCommand extends Command {
 	 *
 	 * @return void
 	 */
-	public function fire()
+	public function handle()
 	{
 		$country     = $this->input->getOption('country');
 		$development = $this->input->getOption('development');
