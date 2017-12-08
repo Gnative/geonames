@@ -70,11 +70,6 @@ class GeonamesServiceProvider extends ServiceProvider {
     {
         $app = $this->app;
 
-        $app->bind('command.geonames.install', function($app)
-        {
-            return new Commands\InstallCommand;
-        });
-
         $app->bind('command.geonames.import', function($app)
         {
             $config = config('geonames.import', array());
@@ -93,7 +88,6 @@ class GeonamesServiceProvider extends ServiceProvider {
         });
 
         $this->commands([
-            'command.geonames.install',
             'command.geonames.import',
             'command.geonames.seed',
             'command.geonames.truncate'
