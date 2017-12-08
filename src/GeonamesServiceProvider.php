@@ -23,9 +23,9 @@ class GeonamesServiceProvider extends ServiceProvider {
         $this->publishes([
             realpath(__DIR__ . '/config/config.php') => $this->app->configPath() . '/geonames.php'
         ], 'config');
-        $this->publishes([
-            realpath(__DIR__ . '/migrations') => $this->app->databasePath() . '/migrations'
-        ], 'migrations');
+
+        $this->loadMigrationsFrom(realpath(__DIR__ . '/migrations'));
+
     }
 
     /**
@@ -36,7 +36,10 @@ class GeonamesServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->registerRepository();
-        $this->registerCommands();
+
+        if ($this->app->runningInConsole()) {
+            $this->registerCommands();
+        }
     }
 
     /**
