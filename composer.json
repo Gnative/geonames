@@ -36,5 +36,12 @@
       "Ipalaus\\Geonames\\": "src/"
     }
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Ipalaus\\Geonames\\GeonamesServiceProvider"
+      ]
+    }
+  }
 }
