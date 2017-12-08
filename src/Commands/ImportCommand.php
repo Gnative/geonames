@@ -138,9 +138,10 @@ class ImportCommand extends Command {
 
 		$this->line("<info>It is time to seed the database. This may take 'a while'...</info>");
 
-		// finally seed the common seeders
+
+        // finally seed the common seeders
 		$this->seedCommand('ContinentsTableSeeder');
-		$this->seedCommand('CountriesTableSeeder');
+        $this->seedCommand('CountriesTableSeeder');
 		$this->seedCommand('AdminDivionsTableSeeder');
 		$this->seedCommand('AdminSubdivionsTableSeeder');
 		$this->seedCommand('HierarchiesTableSeeder');
@@ -237,9 +238,9 @@ class ImportCommand extends Command {
 
 		$process = $this->makeProcess($command);
 
-		$this->runProcess($process);
+        $this->runProcess($process);
 
-		$this->line("<info>Seeded:</info> $class");
+        $this->line("<info>Seeded:</info> $class");
 	}
 
 	/**
@@ -261,9 +262,10 @@ class ImportCommand extends Command {
 	 */
 	public function runProcess(Process $process)
 	{
+
 		$process->run();
 
-		if ( ! $process->isSuccessful()) {
+        if ( ! $process->isSuccessful() && $process->getErrorOutput() != '') {
 			throw new \RuntimeException($process->getErrorOutput());
 		}
 
