@@ -14,7 +14,7 @@ class CreateGeonamesAdminDivisionsTable extends Migration {
 	{
 		Schema::create('geonames_admin_divisions', function(Blueprint $table)
 		{
-			$table->string('code', 6)->index();
+			$table->string('code', 32)->index();
 			$table->text('name');
 			$table->text('name_ascii');
 			$table->integer('name_id')->index();

@@ -29,7 +29,7 @@ class CreateGeonamesNamesTable extends Migration {
 			$table->string('admin3', 20)->index();
 			$table->string('admin4', 20)->index();
 			$table->integer('population')->index();
-			$table->integer('elevation');
+			$table->integer('elevation')->nullable();
 			$table->integer('gtopo30');
 			$table->string('timezone_id', 40)->index();
 			$table->date('modification_at');
