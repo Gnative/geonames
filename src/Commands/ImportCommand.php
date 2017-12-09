@@ -145,7 +145,6 @@ class ImportCommand extends Command {
 
 
         // finally seed the common seeders
-        /*
 		$this->seedCommand('ContinentsTableSeeder');
         $this->seedCommand('CountriesTableSeeder');
 		$this->seedCommand('AdminDivionsTableSeeder');
@@ -153,7 +152,6 @@ class ImportCommand extends Command {
 		$this->seedCommand('HierarchiesTableSeeder');
 		$this->seedCommand('FeaturesTableSeeder');
 		$this->seedCommand('TimezonesTableSeeder');
-        */
 
 		// depending if we run a country, development or plain names we will run
 		// different seeders. Note that the langauge codes file is only
