@@ -18,11 +18,29 @@ class Continent extends Model {
 	 */
 	protected $primaryKey = 'code';
 
-	/* -(  Relationships  )-------------------------------------------------- */
+
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    //public $incrementing = false;
+
+
+
+    /* -(  Relationships  )-------------------------------------------------- */
+
 
 	public function countries()
 	{
-		return $this->hasMany('Ipalaus\Geonames\Eloquent\Country', 'continent');
+		return $this->hasMany(\Ipalaus\Geonames\Eloquent\Country::class,'continent_id','code');
 	}
 
 }

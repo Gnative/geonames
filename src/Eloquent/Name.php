@@ -18,11 +18,12 @@ class Name extends Model {
 	 */
 	protected $with = array('country');
 
+
 	/* -(  Relationships  )-------------------------------------------------- */
 
 	public function country()
 	{
-		return $this->belongsTo('Ipalaus\Geonames\Eloquent\Country');
+		return $this->belongsTo(\Ipalaus\Geonames\Eloquent\Country::class,'country_id','iso_alpha2');
 	}
 
 }
