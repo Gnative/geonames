@@ -265,11 +265,11 @@ class ImportCommand extends Command {
 
 		$process->run();
 
-        if ( ! $process->isSuccessful() && $process->getErrorOutput() != '') {
-			throw new \RuntimeException($process->getErrorOutput());
+        if ( ! $process->isSuccessful() ) {
+            throw new \Symfony\Component\Process\Exception\ProcessFailedException($process);
 		}
 
-		return $process;
+        return $process;
 	}
 
 	/**
