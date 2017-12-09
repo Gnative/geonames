@@ -147,9 +147,9 @@ class ImportCommand extends Command {
         // finally seed the common seeders
 		$this->seedCommand('ContinentsTableSeeder');
         $this->seedCommand('CountriesTableSeeder');
-		$this->seedCommand('AdminDivionsTableSeeder');
-		$this->seedCommand('AdminSubdivionsTableSeeder');
-		$this->seedCommand('HierarchiesTableSeeder');
+		//$this->seedCommand('AdminDivionsTableSeeder');
+		//$this->seedCommand('AdminSubdivionsTableSeeder');
+		//$this->seedCommand('HierarchiesTableSeeder');
 		$this->seedCommand('FeaturesTableSeeder');
 		$this->seedCommand('TimezonesTableSeeder');
 
@@ -161,7 +161,7 @@ class ImportCommand extends Command {
 		} elseif ($country) {
 			$this->seedCommand('CountryNamesTableSeeder', '--country=' . $country .' --features='.$featureCodes);
 		} else {
-			$this->seedCommand('AlternateNamesTableSeeder');
+			//$this->seedCommand('AlternateNamesTableSeeder');
 			$this->seedCommand('LanguageCodesTableSeeder');
 			$this->seedCommand('NamesTableSeeder','--features='.$featureCodes);
 		}
