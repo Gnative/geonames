@@ -84,6 +84,7 @@ class ImportCommand extends Command {
 		$development = $this->input->getOption('development');
 		$fetchOnly   = $this->input->getOption('fetch-only');
 		$wipeFiles   = $this->input->getOption('wipe-files');
+        $featureCodes   = $this->input->getOption('features');
 
 		// i'm sorry but you can't have both :(
 		if ($development and ! is_null($country)) {
@@ -101,6 +102,10 @@ class ImportCommand extends Command {
 
 		// if we forced to wipe files, we will delete the directory
 		$wipeFiles and $this->filesystem->deleteDirectory($path);
+
+		//
+        $featureCodes = strtoupper(preg_replace('/\s+/', '', $featureCodes));
+
 
 		// create the directory if it doesn't exists
 		if ( ! $this->filesystem->isDirectory($path)) {
@@ -140,6 +145,7 @@ class ImportCommand extends Command {
 
 
         // finally seed the common seeders
+        /*
 		$this->seedCommand('ContinentsTableSeeder');
         $this->seedCommand('CountriesTableSeeder');
 		$this->seedCommand('AdminDivionsTableSeeder');
@@ -147,6 +153,7 @@ class ImportCommand extends Command {
 		$this->seedCommand('HierarchiesTableSeeder');
 		$this->seedCommand('FeaturesTableSeeder');
 		$this->seedCommand('TimezonesTableSeeder');
+        */
 
 		// depending if we run a country, development or plain names we will run
 		// different seeders. Note that the langauge codes file is only
@@ -154,11 +161,11 @@ class ImportCommand extends Command {
 		if ($development) {
 			$this->seedCommand('DevelopmentNamesTableSeeder');
 		} elseif ($country) {
-			$this->seedCommand('CountryNamesTableSeeder', '--country=' . $country);
+			$this->seedCommand('CountryNamesTableSeeder', '--country=' . $country .' --features='.$featureCodes);
 		} else {
 			$this->seedCommand('AlternateNamesTableSeeder');
 			$this->seedCommand('LanguageCodesTableSeeder');
-			$this->seedCommand('NamesTableSeeder');
+			$this->seedCommand('NamesTableSeeder','--features='.$featureCodes);
 		}
 	}
 
@@ -334,7 +341,8 @@ class ImportCommand extends Command {
 			array('development', null, InputOption::VALUE_NONE, 'Downloads an smaller version of names (~10MB).'),
 			array('fetch-only', null, InputOption::VALUE_NONE, 'Just download the files.'),
 			array('wipe-files', null, InputOption::VALUE_NONE, 'Wipe old downloaded files and fetch new ones.'),
-		);
+            array('features', null, InputOption::VALUE_REQUIRED, 'Filter names by feature code. Use comma separated feature codes'),
+        );
 	}
 
 }

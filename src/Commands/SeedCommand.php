@@ -30,7 +30,8 @@ class SeedCommand extends IlluminateSeedCommand {
 		return array_merge(array(
 			array('country', null, InputOption::VALUE_REQUIRED, 'Seed a specific country instead.'),
 			array('path', null, InputOption::VALUE_REQUIRED, 'Path where files are located.'),
-		), parent::getOptions());
+            array('features', null, InputOption::VALUE_REQUIRED, 'Filter names by feature code. Use comma separated feature codes'),
+        ), parent::getOptions());
 	}
 
 }

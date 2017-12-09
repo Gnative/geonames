@@ -30,37 +30,44 @@ class Importer {
 	 * @param  string  $path
 	 * @return void
 	 */
-	public function names($table, $path)
+	public function names($table, $path, $features = null)
 	{
 		$this->isEmpty($table);
 
 		$repository = $this->repository;
 
-		$this->parseFile($path, function($row) use ($table, $repository)
-		{
-			$insert = array(
-				'id'              => $row[0],
-				'name'            => $row[1],
-				'ascii_name'      => $row[2],
-				'alternate_names' => $row[3],
-				'latitude'        => $row[4],
-				'longitude'       => $row[5],
-				'f_class'         => $row[6],
-				'f_code'          => $row[7],
-				'country_id'      => $row[8],
-				'cc2'             => $row[9],
-				'admin1'          => $row[10],
-				'admin2'          => $row[11],
-				'admin3'          => $row[12],
-				'admin4'          => $row[13],
-				'population'      => $row[14],
-				'elevation'       => $row[15]? $row[15]:null,
-				'gtopo30'         => $row[16],
-				'timezone_id'     => $row[17],
-				'modification_at' => $row[18],
-			);
+        $featureCodesArray = explode(',',$features);
 
-			$repository->insert($table, $insert);
+
+		$this->parseFile($path, function($row) use ($table, $repository, $features, $featureCodesArray)
+		{
+            if( is_null($features) || in_array( $row[7], $featureCodesArray) ){
+
+		        $insert = array(
+                    'id'              => $row[0],
+                    'name'            => $row[1],
+                    'ascii_name'      => $row[2],
+                    'alternate_names' => $row[3],
+                    'latitude'        => $row[4],
+                    'longitude'       => $row[5],
+                    'f_class'         => $row[6],
+                    'f_code'          => $row[7],
+                    'country_id'      => $row[8],
+                    'cc2'             => $row[9],
+                    'admin1'          => $row[10],
+                    'admin2'          => $row[11],
+                    'admin3'          => $row[12],
+                    'admin4'          => $row[13],
+                    'population'      => $row[14],
+                    'elevation'       => $row[15]? $row[15]:null,
+                    'gtopo30'         => $row[16],
+                    'timezone_id'     => $row[17],
+                    'modification_at' => $row[18],
+                );
+
+                $repository->insert($table, $insert);
+            }
+
 		});
 	}
 

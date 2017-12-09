@@ -11,8 +11,9 @@ class CountryNamesTableSeeder extends DatabaseSeeder {
 	{
 		$path    = $this->command->option('path');
 		$country = $this->command->option('country');
+        $features = $this->command->option('features');
 
-		$this->importer->names('geonames_names', $path . '/' . $country . '.txt');
+		$this->importer->names('geonames_names', $path . '/' . $country . '.txt', $features);
 	}
 
 }
